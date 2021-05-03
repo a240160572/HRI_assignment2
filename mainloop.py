@@ -5,7 +5,7 @@ that comes with pygame. It is based on a 'popular' web banner.
 Note there are comments here, but for the full explanation,
 follow along in the tutorial.
 """
-#test
+
 
 # Import Modules
 from definitions import *
