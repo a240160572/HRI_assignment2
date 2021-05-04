@@ -1,8 +1,14 @@
 import math
 import numpy as np
-import behaviour_based_navigation as bn
 from definitions import *
 
+Navi_type = input('Choose your Braitenberg vehicle: 1. love, 2. coward, 3. aggressive and 4. explore    ')
+B_type = ['love','coward','aggressive','explore']
+navigation_file = 'behaviour_based_navigation_' + B_type[Navi_type-1]
+
+import importlib
+bn = importlib.import_module(navigation_file)
+#import behaviour_based_navigation as bn
 
 def compute_target_location(robot, alltargets):
     """This function computes the distance to the target and the angle relative to the robot in world coordinates"""
@@ -24,6 +30,6 @@ def scan_world(robot, allobstacles, alltargets):
     target_angle_robot = target_angle - robot.phi  # This is the angle relative to the heading direction of the robot.
 
     turn_rate = bn.compute_turnrate(target_distance, target_angle_robot, sonar_left, sonar_right)
-    velocity = bn.compute_velocity(sonar_left, sonar_right)
+    velocity = bn.compute_velocity(target_distance, target_angle_robot)
     robot.set_vel(velocity, turn_rate) # the simulated robot does not sidestep
 

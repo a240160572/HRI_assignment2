@@ -3,13 +3,13 @@ import random
 
 degree = math.pi/180.0 # radians per degree
 
-def FTarget(target_distance, target_angle):
-
+def FTarget(target_distance, target_angle): # angle is from world frame
+    
     #do something useful here
-    Ftar=0
+    Ftar= - math.sin(-target_angle)
     return Ftar
 
-def FObstacle(obs_distance, obs_angle):
+def FObstacle(obs_distance, obs_angle): # angle is from world frame
     too_far=10 #cm
 
     if obs_distance < too_far:

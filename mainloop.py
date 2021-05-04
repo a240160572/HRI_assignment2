@@ -6,11 +6,11 @@ Note there are comments here, but for the full explanation,
 follow along in the tutorial.
 """
 
-
 # Import Modules
 from definitions import *
 import sprite_routines as sp
 import my_navigation_code as nav
+
 
 
 def create_world(background):
@@ -24,10 +24,10 @@ def create_world(background):
     wall4 = sp.obstacle(30, 30, 15, 2)
 
     polygon1 = sp.polygon([[0, 0], [200, 0], [300, 300], [100, 400], [-100, 300]], (250, 250, 0))  # px
-    polygon1.set_pos(40, 10, 0)  # cm
     # allsprites = pygame.sprite.Group((target1,nao1))
     alltargets = sp.pygame.sprite.Group((target1,))
-    allobstacles = sp.pygame.sprite.Group((wall1, wall2, wall3, wall4))
+#    allobstacles = sp.pygame.sprite.Group((wall1, wall2, wall3, wa/ll4))
+    allobstacles = sp.pygame.sprite.Group(())
     allrobots = sp.pygame.sprite.Group((nao1,))
 
     whiff_sound = sp.load_sound('whiff.wav')
@@ -99,6 +99,7 @@ def mainloop():
     target_reached = False
     autonomous = False
     collision_detection = True
+    
 
     nao1 = allrobots.sprites()[0]  # there is only one robot currently
     target = alltargets.sprites()[0] # and one target

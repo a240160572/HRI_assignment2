@@ -1,13 +1,17 @@
 import math
 import random
-# x +
+import numpy as np
+import matplotlib.pyplot as plt
+
+print("\n"+'Braitenberg vehicles type Aggressive selected'+"\n")
+velocity_track = 0
 
 degree = math.pi/180.0 # radians per degree
 
 def FTarget(target_distance, target_angle):
 
     #do something useful here
-    Ftar=0
+    Ftar= - math.sin(-target_angle)
     return Ftar
 
 def FObstacle(obs_distance, obs_angle):
@@ -32,20 +36,21 @@ def FOrienting():
     Forient=0
     return Forient
 
-def compute_velocity(sonar_distance_left, sonar_distance_right):
+def compute_velocity(target_distance, target_angle_robot):
+    
+    global velocity_track
+    
     max_velocity = 1.0
-    max_distance = 0.5 #m
-    min_distance = 0.2 #m
+    max_distance = 8.0 #m
+    min_distance = 5.0 #m
 
-    if sonar_distance_left>max_distance and sonar_distance_right > max_distance:
+    if target_distance>=max_distance:
         velocity = max_velocity
-    elif sonar_distance_left<min_distance or sonar_distance_right < min_distance:
-        velocity = 0.0
-    elif sonar_distance_left<sonar_distance_right:
-        velocity = max_velocity*sonar_distance_left/max_distance
     else:
-        velocity = max_velocity*sonar_distance_right/max_distance
+        velocity = pow(-target_distance+max_distance+1,2)
 
+    velocity_track = np.append(velocity_track,velocity)
+    plt.plot(velocity_track,'-o')
     
     return velocity
 
